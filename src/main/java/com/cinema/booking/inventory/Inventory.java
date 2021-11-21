@@ -35,8 +35,9 @@ public class Inventory {
     @NonNull
     private Seat seat;
 
+    @Column(nullable = false)
     @Enumerated(EnumType.STRING)
-    private InventoryStatus status;
+    private InventoryStatus status = InventoryStatus.AVAILABLE;
 
     @Column(columnDefinition="tinyint(1) default 1")
     private Boolean enabled;
