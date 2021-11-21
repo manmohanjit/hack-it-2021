@@ -22,7 +22,6 @@ public class Show {
     private Long id;
 
     @ManyToOne(optional = false)
-    @JsonBackReference
     @NonNull
     private Movie movie;
 

@@ -20,7 +20,6 @@ public class Category {
     private Long id;
 
     @ManyToOne(optional = false)
-    @JsonBackReference
     @NonNull
     private Movie movie;
 

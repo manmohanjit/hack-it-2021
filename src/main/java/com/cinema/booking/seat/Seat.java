@@ -21,7 +21,6 @@ public class Seat {
     private Long id;
 
     @ManyToOne(optional = false)
-    @JsonBackReference
     @NonNull
     private Hall hall;
 

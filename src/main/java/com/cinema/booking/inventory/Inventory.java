@@ -25,17 +25,14 @@ public class Inventory {
     private Long id;
 
     @ManyToOne(optional = false)
-    @JsonBackReference
     @NonNull
     private Show show;
 
     @ManyToOne(optional = false)
-    @JsonBackReference
     @NonNull
     private Category category;
 
     @ManyToOne(optional = false)
-    @JsonBackReference
     @NonNull
     private Seat seat;
 
