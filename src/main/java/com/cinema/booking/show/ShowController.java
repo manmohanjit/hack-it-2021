@@ -1,5 +1,8 @@
 package com.cinema.booking.show;
 
+import com.cinema.booking.category.CategoryData;
+import com.cinema.booking.inventory.InventoryData;
+import com.cinema.booking.inventory.InventoryService;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,6 +18,7 @@ import java.util.List;
 public class ShowController {
 
     final private ShowService showService;
+    final private InventoryService inventoryService;
 
     @GetMapping(path = "{showId}")
     public ShowData getShow(@PathVariable("showId") Long showId) {
@@ -23,6 +27,11 @@ public class ShowController {
                 .orElseThrow(() -> new IllegalStateException("Unable to find show by id "+showId));
 
         return ShowMapper.INSTANCE.fromShow(show);
+    }
+
+    @GetMapping(path = "{showId}/inventory")
+    public List<InventoryData> getInventoryByShow(@PathVariable("showId") Long showId) {
+        return inventoryService.getInventoryByShow(showId);
     }
 
 }

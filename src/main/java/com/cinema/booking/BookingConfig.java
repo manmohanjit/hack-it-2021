@@ -5,7 +5,7 @@ import com.cinema.booking.hall.HallRepository;
 import com.cinema.booking.category.Category;
 import com.cinema.booking.inventory.Inventory;
 import com.cinema.booking.inventory.InventoryRepository;
-import com.cinema.booking.inventory.Status;
+import com.cinema.booking.inventory.InventoryStatus;
 import com.cinema.booking.movie.Movie;
 import com.cinema.booking.movie.MovieRepository;
 import com.cinema.booking.seat.Seat;
@@ -54,7 +54,7 @@ public class BookingConfig {
 
             List<Inventory> inventoryList = hall.getSeats()
                     .stream()
-                    .map(seat -> new Inventory(show, category, seat, Status.AVAILABLE, true))
+                    .map(seat -> new Inventory(show, category, seat, InventoryStatus.AVAILABLE, true))
                     .toList();
             inventoryRepository.saveAll(inventoryList);
         };

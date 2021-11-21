@@ -1,6 +1,6 @@
 package com.cinema.booking.inventory;
 
-public enum Status {
+public enum InventoryStatus {
     SOLD,
     RESERVED,
     AVAILABLE

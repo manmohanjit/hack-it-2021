@@ -1,7 +1,6 @@
 package com.cinema.booking.inventory;
 
 import com.cinema.booking.category.Category;
-import com.cinema.booking.hall.Hall;
 import com.cinema.booking.seat.Seat;
 import com.cinema.booking.show.Show;
 import com.fasterxml.jackson.annotation.JsonBackReference;
@@ -37,17 +36,17 @@ public class Inventory {
     private Seat seat;
 
     @Enumerated(EnumType.STRING)
-    private Status status;
+    private InventoryStatus status;
 
     @Column(columnDefinition="tinyint(1) default 1")
     private Boolean enabled;
 
-    public Inventory(@NonNull Show show, @NonNull Category category, @NonNull Seat seat, Status status, Boolean enabled) {
+    public Inventory(@NonNull Show show, @NonNull Category category, @NonNull Seat seat, InventoryStatus status, Boolean enabled) {
         this.show = show;
         this.category = category;
         this.seat = seat;
 
-        this.status = status == null ? Status.AVAILABLE : status;
+        this.status = status == null ? InventoryStatus.AVAILABLE : status;
         this.enabled = enabled == null || enabled;
     }
 }
