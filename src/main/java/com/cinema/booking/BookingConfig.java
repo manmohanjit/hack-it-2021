@@ -64,6 +64,9 @@ public class BookingConfig {
 
             Optional<Inventory> item = inventoryList.stream().findFirst();
             if(item.isPresent()) {
+                item.get().setStatus(InventoryStatus.RESERVED);
+                inventoryRepository.save(item.get());
+
                 Order order = new Order("John Doe", "john@example.com");
                 order.addItem(item.get());
                 orderRepository.save(order);
