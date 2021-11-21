@@ -1,6 +1,5 @@
 package com.cinema.booking.seat;
 
-import com.cinema.booking.customer.Customer;
 import com.cinema.booking.hall.Hall;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
