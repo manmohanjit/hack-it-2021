@@ -8,6 +8,8 @@ import com.cinema.booking.inventory.InventoryRepository;
 import com.cinema.booking.inventory.InventoryStatus;
 import com.cinema.booking.movie.Movie;
 import com.cinema.booking.movie.MovieRepository;
+import com.cinema.booking.order.Order;
+import com.cinema.booking.order.OrderRepository;
 import com.cinema.booking.seat.Seat;
 import com.cinema.booking.show.Show;
 import org.springframework.boot.CommandLineRunner;
@@ -16,6 +18,7 @@ import org.springframework.context.annotation.Configuration;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 
 @Configuration
 public class BookingConfig {
@@ -24,7 +27,8 @@ public class BookingConfig {
     CommandLineRunner commandLineRunnerForMovie(
             MovieRepository movieRepository,
             HallRepository hallRepository,
-            InventoryRepository inventoryRepository
+            InventoryRepository inventoryRepository,
+            OrderRepository orderRepository
     ) {
         return args -> {
             Hall hall = new Hall("Cinema 1");
@@ -57,6 +61,13 @@ public class BookingConfig {
                     .map(seat -> new Inventory(show, category, seat, InventoryStatus.AVAILABLE, true))
                     .toList();
             inventoryRepository.saveAll(inventoryList);
+
+            Optional<Inventory> item = inventoryList.stream().findFirst();
+            if(item.isPresent()) {
+                Order order = new Order("John Doe", "john@example.com");
+                order.addItem(item.get());
+                orderRepository.save(order);
+            }
         };
     }
 }

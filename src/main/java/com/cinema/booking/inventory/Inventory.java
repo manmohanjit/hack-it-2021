@@ -1,12 +1,15 @@
 package com.cinema.booking.inventory;
 
 import com.cinema.booking.category.Category;
+import com.cinema.booking.order.Order;
 import com.cinema.booking.seat.Seat;
 import com.cinema.booking.show.Show;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity(name = "inventory")
 @Table(uniqueConstraints={
@@ -41,6 +44,9 @@ public class Inventory {
 
     @Column(columnDefinition="tinyint(1) default 1")
     private Boolean enabled;
+
+    @ManyToMany(mappedBy = "items")
+    private Set<Order> orders = new HashSet<>();
 
     public Inventory(@NonNull Show show, @NonNull Category category, @NonNull Seat seat, InventoryStatus status, Boolean enabled) {
         this.show = show;
