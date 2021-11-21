@@ -1,6 +1,7 @@
 package com.cinema.booking.hall;
 
 import com.cinema.booking.seat.Seat;
+import com.cinema.booking.seat.SeatData;
 import com.cinema.booking.seat.SeatService;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,23 +21,19 @@ public class HallController {
     final private SeatService seatService;
 
     @GetMapping
-    public List<Hall> index() {
+    public List<HallData> getHalls() {
         return hallService.getHalls();
     }
 
     @GetMapping(path = "{hallId}")
-    public Hall show(@PathVariable("hallId") Long hallId) {
+    public HallData show(@PathVariable("hallId") Long hallId) {
         return hallService
                 .findHall(hallId)
                 .orElseThrow(() -> new IllegalStateException("Unable to find hall by id "+hallId));
     }
 
     @GetMapping(path = "{hallId}/seats")
-    public List<Seat> seats(@PathVariable("hallId") Long hallId) {
-        Hall hall = hallService
-                .findHall(hallId)
-                .orElseThrow(() -> new IllegalStateException("Unable to find hall by id "+hallId));
-
-        return seatService.getSeatsByHall(hall);
+    public List<SeatData> seats(@PathVariable("hallId") Long hallId) {
+        return seatService.getSeatsByHall(hallId);
     }
 }

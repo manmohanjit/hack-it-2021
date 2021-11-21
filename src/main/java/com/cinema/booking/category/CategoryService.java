@@ -1,5 +1,6 @@
 package com.cinema.booking.category;
 
+import com.cinema.booking.movie.Movie;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -12,11 +13,9 @@ public class CategoryService {
 
     private final CategoryRepository categoryRepository;
 
-    public List<Category> getCategories() {
-        return categoryRepository.findAll();
-    }
+    public List<CategoryData> getCategoriesForMovie(Long movieId) {
+        List<Category> categories = categoryRepository.findAllByMovieId(movieId);
 
-    public Optional<Category> findCategory(Long id) {
-        return categoryRepository.findById(id);
+        return CategoryMapper.INSTANCE.fromCategories(categories);
     }
 }

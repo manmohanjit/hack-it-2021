@@ -14,15 +14,9 @@ public class SeatService {
 
     private final SeatRepository seatRepository;
 
-    public List<Seat> getSeats() {
-        return seatRepository.findAll();
-    }
+    public List<SeatData> getSeatsByHall(Long hallId) {
+        List<Seat> seats = seatRepository.findAllByHallId(hallId);
 
-    public Optional<Seat> findSeat(Long id) {
-        return seatRepository.findById(id);
-    }
-
-    public List<Seat> getSeatsByHall(Hall hall) {
-        return seatRepository.findAllByHall(hall);
+        return SeatMapper.INSTANCE.fromSeats(seats);
     }
 }

@@ -1,9 +1,12 @@
 package com.cinema.booking.show;
 
+import com.cinema.booking.category.Category;
+import com.cinema.booking.movie.Movie;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Optional;
 
 @Service
@@ -12,12 +15,16 @@ public class ShowService {
 
     private final ShowRepository showRepository;
 
-    public List<Show> getShows() {
-        return showRepository.findAll();
+    public Optional<Show> findShow(Long id) {
+        Optional<Show> show = showRepository.findById(id);
+
+        return show;
     }
 
-    public Optional<Show> findShow(Long id) {
-        return showRepository.findById(id);
+    public List<ShowData> getShowsForMovie(Long movieId) {
+        List<Show> shows = showRepository.findAllByMovieId(movieId);
+
+        return ShowMapper.INSTANCE.fromShows(shows);
     }
 
 }

@@ -32,9 +32,14 @@ public class Category {
     @NonNull
     private Integer price;
 
-    public Category(@NonNull Movie movie, @NonNull String label, @NonNull Integer price) {
+    @Column(nullable = false)
+    @NonNull
+    private String colour;
+
+    public Category(@NonNull Movie movie, @NonNull String label, @NonNull Integer price, @NonNull String colour) {
         this.movie = movie;
         this.label = label;
         this.price = price;
+        this.colour = colour;
     }
 }

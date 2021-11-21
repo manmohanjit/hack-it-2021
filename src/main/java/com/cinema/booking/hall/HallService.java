@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.swing.text.html.Option;
 import java.util.List;
 import java.util.Optional;
 
@@ -13,11 +14,19 @@ public class HallService {
 
     private final HallRepository hallRepository;
 
-    public List<Hall> getHalls() {
-        return hallRepository.findAll();
+    public List<HallData> getHalls() {
+        List<Hall> halls = hallRepository.findAll();
+
+        return HallMapper.INSTANCE.fromHalls(halls);
     }
 
-    public Optional<Hall> findHall(Long id) {
-        return hallRepository.findById(id);
+    public Optional<HallData> findHall(Long hallId) {
+        Optional<Hall> hall = hallRepository.findById(hallId);
+
+        if(hall.isEmpty()) {
+            return Optional.empty();
+        }
+
+        return Optional.of(HallMapper.INSTANCE.fromHall(hall.get()));
     }
 }

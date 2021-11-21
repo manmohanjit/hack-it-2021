@@ -38,7 +38,8 @@ public class BookingConfig {
             Category category = new Category(
                     movie,
                     "Gold",
-                    5000
+                    5000,
+                    "#000000"
             );
             movie.addCategory(category);
 
@@ -49,7 +50,6 @@ public class BookingConfig {
                     LocalDateTime.now().plusDays(1)
             );
             movie.addShow(show);
-
             movieRepository.save(movie);
 
             List<Inventory> inventoryList = hall.getSeats()

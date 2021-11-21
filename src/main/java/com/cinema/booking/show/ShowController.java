@@ -16,16 +16,13 @@ public class ShowController {
 
     final private ShowService showService;
 
-    @GetMapping
-    public List<Show> index() {
-        return showService.getShows();
-    }
-
     @GetMapping(path = "{showId}")
-    public Show show(@PathVariable("showId") Long showId) {
-        return showService
+    public ShowData getShow(@PathVariable("showId") Long showId) {
+        Show show = showService
                 .findShow(showId)
                 .orElseThrow(() -> new IllegalStateException("Unable to find show by id "+showId));
+
+        return ShowMapper.INSTANCE.fromShow(show);
     }
 
 }

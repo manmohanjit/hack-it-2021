@@ -12,4 +12,5 @@ public interface SeatRepository extends JpaRepository<Seat, Long> {
 
     List<Seat> findAllByHall(Hall hall);
 
+    List<Seat> findAllByHallId(Long hallId);
 }
