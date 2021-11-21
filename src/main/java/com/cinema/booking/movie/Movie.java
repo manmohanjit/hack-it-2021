@@ -23,18 +23,15 @@ public class Movie {
     private Long id;
 
     @Column(nullable = false)
-    @NonNull
     private String title;
 
     @Lob
     private String body;
 
     @OneToMany(mappedBy = "movie", fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
-    @JsonManagedReference
     private Set<Category> categories = new HashSet<>();
 
     @OneToMany(mappedBy = "movie", fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
-    @JsonManagedReference
     private Set<Show> shows = new HashSet<>();
 
     public Movie(String title, String body) {
