@@ -1,6 +1,6 @@
 package com.cinema.booking.movie;
 
-import com.cinema.booking.category.CategoryData;
+import com.cinema.booking.category.CategoryResponseData;
 import com.cinema.booking.category.CategoryService;
 import com.cinema.booking.show.ShowData;
 import com.cinema.booking.show.ShowService;
@@ -19,12 +19,12 @@ public class MovieController {
     final private CategoryService categoryService;
 
     @GetMapping
-    public List<MovieData> getMovies() {
+    public List<MovieResponseData> getMovies() {
         return movieService.getMovies();
     }
 
     @GetMapping(path = "{movieId}")
-    public MovieData findMovie(@PathVariable("movieId") Long movieId) {
+    public MovieResponseData findMovie(@PathVariable("movieId") Long movieId) {
         return movieService
                 .findMovie(movieId)
                 .orElseThrow(() -> new IllegalStateException("Unable to find movie by id "+movieId));
@@ -36,7 +36,7 @@ public class MovieController {
     }
 
     @GetMapping(path = "{movieId}/categories")
-    public List<CategoryData> getCategoriesForMovie(@PathVariable("movieId") Long movieId) {
+    public List<CategoryResponseData> getCategoriesForMovie(@PathVariable("movieId") Long movieId) {
         return categoryService.getCategoriesForMovie(movieId);
     }
 

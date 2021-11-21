@@ -11,10 +11,10 @@ public interface CategoryMapper {
 
     CategoryMapper INSTANCE = Mappers.getMapper(CategoryMapper.class);
 
-    CategoryData fromShow(Show show);
+    CategoryResponseData fromShow(Show show);
 
-    CategoryData fromCategory(Category category);
+    CategoryResponseData fromCategory(Category category);
 
-    List<CategoryData> fromCategories(List<Category> categories);
+    List<CategoryResponseData> fromCategories(List<Category> categories);
 
 }

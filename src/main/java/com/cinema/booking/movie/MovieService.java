@@ -16,13 +16,13 @@ public class MovieService {
     private final ShowRepository showRepository;
     private final CategoryRepository categoryRepository;
 
-    public List<MovieData> getMovies() {
+    public List<MovieResponseData> getMovies() {
         List<Movie> movies = movieRepository.findAll();
 
         return MovieMapper.INSTANCE.fromMovies(movies);
     }
 
-    public Optional<MovieData> findMovie(Long movieId) {
+    public Optional<MovieResponseData> findMovie(Long movieId) {
         Optional<Movie> movie = movieRepository
                 .findById(movieId);
 

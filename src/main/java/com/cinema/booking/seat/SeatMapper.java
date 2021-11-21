@@ -10,8 +10,8 @@ public interface SeatMapper {
 
     SeatMapper INSTANCE = Mappers.getMapper(SeatMapper.class);
 
-    SeatData fromSeat(Seat seat);
+    SeatResponseData fromSeat(Seat seat);
 
-    List<SeatData> fromSeats(List<Seat> seats);
+    List<SeatResponseData> fromSeats(List<Seat> seats);
 
 }

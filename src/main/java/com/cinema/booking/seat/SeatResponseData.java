@@ -7,7 +7,7 @@ import lombok.*;
 import javax.persistence.*;
 
 @Data
-public class SeatData {
+public class SeatResponseData {
 
     private Long id;
     private String label;
