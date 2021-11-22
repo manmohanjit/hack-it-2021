@@ -41,10 +41,10 @@ public class Order {
     @Enumerated(EnumType.STRING)
     private OrderStatus status = OrderStatus.INITIAL;
 
-    @Column(nullable = false)
+    @Column
     private String name;
 
-    @Column(nullable = false)
+    @Column
     private String email;
 
     @ManyToMany(fetch = FetchType.EAGER, cascade = { CascadeType.MERGE })
