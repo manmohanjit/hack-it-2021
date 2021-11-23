@@ -10,6 +10,7 @@ import com.cinema.booking.movie.Movie;
 import com.cinema.booking.movie.MovieRepository;
 import com.cinema.booking.order.Order;
 import com.cinema.booking.order.OrderRepository;
+import com.cinema.booking.order.OrderStatus;
 import com.cinema.booking.seat.Seat;
 import com.cinema.booking.show.Show;
 import org.springframework.boot.CommandLineRunner;
@@ -68,6 +69,7 @@ public class BookingConfig {
                 inventoryRepository.save(item.get());
 
                 Order order = new Order("John Doe", "john@example.com");
+                order.setStatus(OrderStatus.PENDING);
                 order.addItem(item.get());
                 orderRepository.save(order);
             }
