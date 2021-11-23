@@ -4,23 +4,29 @@ import com.cinema.booking.inventory.Inventory;
 import com.cinema.booking.inventory.InventoryRepository;
 import com.cinema.booking.inventory.InventoryStatus;
 import com.cinema.booking.inventory.InventoryUnavailableException;
+import com.cinema.booking.movie.Movie;
+import com.cinema.booking.seat.Seat;
+import com.cinema.booking.show.Show;
 import lombok.AllArgsConstructor;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.BindingResult;
 
 import javax.transaction.Transactional;
+import java.sql.Array;
 import java.time.LocalDateTime;
-import java.util.List;
-import java.util.Optional;
-import java.util.Set;
-import java.util.UUID;
+import java.util.*;
 import java.util.function.Consumer;
+import java.util.stream.Collectors;
 
 @Service
 @AllArgsConstructor
 public class OrderService {
     private final OrderRepository orderRepository;
     private final InventoryRepository inventoryRepository;
+    private JavaMailSender emailSender;
 
 
     public Optional<OrderResponseData> findOrder(String id) {
@@ -30,14 +36,14 @@ public class OrderService {
     }
 
     @Transactional
-    public OrderResponseData createOrder(CreateOrderRequestData createOrderRequestData) {
+    public OrderResponseData createOrder(CreateOrderRequestData createOrderRequestData) throws InventoryUnavailableException {
         Order order = new Order();
 
         List<Inventory> items = inventoryRepository
                 .findAllByIdInAndStatus(createOrderRequestData.getItems(), InventoryStatus.AVAILABLE);
 
         if(items.size() != createOrderRequestData.getItems().size()) {
-            throw new IllegalStateException("Some of the seats selected are unavailable");
+            throw new InventoryUnavailableException();
         }
 
         items.forEach(new Consumer<Inventory>() {
@@ -55,6 +61,47 @@ public class OrderService {
         return OrderMapper.INSTANCE.fromOrder(order);
     }
 
+    @Async
+    public void sendOrderMail(String id) {
+        Optional<Order> orderData = orderRepository.findById(UUID.fromString(id));
+
+        if(orderData.isEmpty() || orderData.get().getStatus() != OrderStatus.COMPLETED) {
+            return;
+        }
+
+        Order order = orderData.get();
+
+        String seatsList = order.getItems().stream().map(Inventory::getSeat).map(Seat::getLabel).collect(Collectors.joining(", "));
+
+        Optional<Show> showData = order.getItems()
+                .stream()
+                .findFirst()
+                .map(Inventory::getShow);
+
+        Optional<Movie> movieData = showData.map(Show::getMovie);
+
+
+        SimpleMailMessage message = new SimpleMailMessage();
+        message.setFrom("no-reply@example.com");
+        message.setTo(order.getEmail());
+        message.setSubject("Your order for "+(movieData.isPresent() ? movieData.get().getTitle() : "your show")+" has been processed!");
+
+        List<String> body = new ArrayList<>();
+        body.add("Hello "+order.getName() + ",\n\n");
+        body.add("Your booking details are as below:\n\n");
+        movieData.ifPresent(movie -> body.add("Movie: " + movie.getTitle() + "\n"));
+        showData.ifPresent(show -> body.add("Date: " + show.getStartsAt() + "\n"));
+        if(!seatsList.isEmpty()) {
+            body.add("Seats: "+seatsList + "\n");
+        }
+
+        body.add("Reference: " + order.getId().toString() + "\n\n");
+        body.add("Thank you and see you soon!");
+
+        message.setText(String.join("", body));
+
+        emailSender.send(message);
+    }
 
     public OrderResponseData updateOrderDetails(Order order, UpdateOrderRequestData updateOrderRequestData) throws InvalidOrderStateException {
         if(order.getStatus() != OrderStatus.INITIAL) {

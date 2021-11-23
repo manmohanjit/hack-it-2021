@@ -22,8 +22,8 @@ public class OrderController {
     @PostMapping
     public OrderResponseData createOrder(@Valid CreateOrderRequestData createOrderRequestData) {
         try {
-        return orderService
-                .createOrder(createOrderRequestData);
+            return orderService
+                    .createOrder(createOrderRequestData);
         } catch (InventoryUnavailableException e) {
             throw new ResponseStatusException(HttpStatus.UNPROCESSABLE_ENTITY, "Some of the selected seats are unavailable.");
         }
@@ -40,8 +40,8 @@ public class OrderController {
     @PatchMapping(path = "{orderId}")
     public OrderResponseData updateOrder(@PathVariable("orderId") String orderId, @Valid UpdateOrderRequestData updateOrderRequestData) {
         try {
-        return orderService
-                .updateOrderDetails(orderId, updateOrderRequestData)
+            return orderService
+                    .updateOrderDetails(orderId, updateOrderRequestData)
                     .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Unable to find order with id "+orderId));
         } catch (InvalidOrderStateException e) {
             throw new ResponseStatusException(HttpStatus.UNPROCESSABLE_ENTITY, e.getMessage());
@@ -51,8 +51,8 @@ public class OrderController {
     @DeleteMapping(path = "{orderId}")
     public OrderResponseData cancelOrder(@PathVariable("orderId") String orderId) {
         try {
-        return orderService
-                .cancelOrder(orderId)
+            return orderService
+                    .cancelOrder(orderId)
                     .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Unable to find order with id "+orderId));
         } catch (InvalidOrderStateException e) {
             throw new ResponseStatusException(HttpStatus.UNPROCESSABLE_ENTITY, e.getMessage());
@@ -63,9 +63,10 @@ public class OrderController {
     public OrderResponseData completeOrder(@PathVariable("orderId") String orderId) {
         try {
             OrderResponseData order = orderService
-                .completeOrder(orderId)
+                    .completeOrder(orderId)
                     .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Unable to find order with id "+orderId));
 
+            orderService.sendOrderMail(orderId);
 
             return order;
         } catch (InvalidOrderStateException e) {
