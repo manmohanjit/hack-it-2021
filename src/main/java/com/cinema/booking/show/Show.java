@@ -25,7 +25,7 @@ public class Show {
     @NonNull
     private Movie movie;
 
-    @ManyToOne(optional = false)
+    @ManyToOne(optional = false, fetch = FetchType.EAGER)
     @JsonBackReference
     @NonNull
     private Hall hall;

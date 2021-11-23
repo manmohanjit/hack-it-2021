@@ -26,10 +26,10 @@ public class Hall {
     @NonNull
     private String title;
 
-    @OneToMany(mappedBy = "hall", fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @OneToMany(mappedBy = "hall", fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     private Set<Seat> seats = new HashSet<>();
 
-    @OneToMany(mappedBy = "hall", fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @OneToMany(mappedBy = "hall", fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     private Set<Show> shows = new HashSet<>();
 
     public Hall(@NonNull String title) {

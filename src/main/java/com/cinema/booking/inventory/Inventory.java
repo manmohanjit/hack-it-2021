@@ -26,15 +26,15 @@ public class Inventory {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne(optional = false)
+    @ManyToOne(optional = false, fetch = FetchType.EAGER)
     @NonNull
     private Show show;
 
-    @ManyToOne(optional = false)
+    @ManyToOne(optional = false, fetch = FetchType.EAGER)
     @NonNull
     private Category category;
 
-    @ManyToOne(optional = false)
+    @ManyToOne(optional = false, fetch = FetchType.EAGER)
     @NonNull
     private Seat seat;
 
@@ -45,7 +45,7 @@ public class Inventory {
     @Column(columnDefinition="tinyint(1) default 1")
     private Boolean enabled;
 
-    @ManyToMany(mappedBy = "items")
+    @ManyToMany(mappedBy = "items", fetch = FetchType.LAZY)
     private Set<Order> orders = new HashSet<>();
 
     public Inventory(@NonNull Show show, @NonNull Category category, @NonNull Seat seat, InventoryStatus status, Boolean enabled) {
