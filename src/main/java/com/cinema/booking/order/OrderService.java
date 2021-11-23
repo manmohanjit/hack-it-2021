@@ -3,6 +3,7 @@ package com.cinema.booking.order;
 import com.cinema.booking.inventory.Inventory;
 import com.cinema.booking.inventory.InventoryRepository;
 import com.cinema.booking.inventory.InventoryStatus;
+import com.cinema.booking.inventory.InventoryUnavailableException;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.BindingResult;
@@ -54,9 +55,10 @@ public class OrderService {
         return OrderMapper.INSTANCE.fromOrder(order);
     }
 
-    public OrderResponseData updateOrderDetails(Order order, UpdateOrderRequestData updateOrderRequestData) {
+
+    public OrderResponseData updateOrderDetails(Order order, UpdateOrderRequestData updateOrderRequestData) throws InvalidOrderStateException {
         if(order.getStatus() != OrderStatus.INITIAL) {
-            throw new IllegalStateException("Order state is invalid");
+            throw new InvalidOrderStateException(order, "Order is in invalid state");
         }
 
         order.setName(updateOrderRequestData.getName());
@@ -69,7 +71,7 @@ public class OrderService {
         return OrderMapper.INSTANCE.fromOrder(order);
     }
 
-    public Optional<OrderResponseData> updateOrderDetails(String id, UpdateOrderRequestData updateOrderRequestData) {
+    public Optional<OrderResponseData> updateOrderDetails(String id, UpdateOrderRequestData updateOrderRequestData) throws InvalidOrderStateException {
         Optional<Order> order = orderRepository.findById(UUID.fromString(id));
 
         if(order.isEmpty()) {
@@ -80,9 +82,9 @@ public class OrderService {
     }
 
     @Transactional
-    public OrderResponseData cancelOrder(Order order) {
+    public OrderResponseData cancelOrder(Order order) throws InvalidOrderStateException {
         if(order.getStatus() != OrderStatus.INITIAL && order.getStatus() != OrderStatus.PENDING) {
-            throw new IllegalStateException("Order state is invalid");
+            throw new InvalidOrderStateException(order, "Order is in invalid state");
         }
 
         order.setStatus(OrderStatus.EXPIRED);
@@ -105,7 +107,7 @@ public class OrderService {
     }
 
     @Transactional
-    public Optional<OrderResponseData> cancelOrder(String id) {
+    public Optional<OrderResponseData> cancelOrder(String id) throws InvalidOrderStateException {
         Optional<Order> order = orderRepository.findById(UUID.fromString(id));
 
         if(order.isEmpty()) {
@@ -117,9 +119,9 @@ public class OrderService {
 
 
     @Transactional
-    public OrderResponseData completeOrder(Order order) {
+    public OrderResponseData completeOrder(Order order) throws InvalidOrderStateException {
         if(order.getStatus() != OrderStatus.PENDING) {
-            throw new IllegalStateException("Order state is invalid");
+            throw new InvalidOrderStateException(order, "Order is in invalid state");
         }
 
         order.setStatus(OrderStatus.COMPLETED);
@@ -142,7 +144,7 @@ public class OrderService {
     }
 
     @Transactional
-    public Optional<OrderResponseData> completeOrder(String id) {
+    public Optional<OrderResponseData> completeOrder(String id) throws InvalidOrderStateException {
         Optional<Order> order = orderRepository.findById(UUID.fromString(id));
 
         if(order.isEmpty()) {

@@ -3,10 +3,12 @@ package com.cinema.booking.show;
 import com.cinema.booking.inventory.InventoryResponseData;
 import com.cinema.booking.inventory.InventoryService;
 import lombok.AllArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 
@@ -20,11 +22,9 @@ public class ShowController {
 
     @GetMapping(path = "{showId}")
     public ShowData getShow(@PathVariable("showId") Long showId) {
-        Show show = showService
+        return showService
                 .findShow(showId)
-                .orElseThrow(() -> new IllegalStateException("Unable to find show by id "+showId));
-
-        return ShowMapper.INSTANCE.fromShow(show);
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Unable to find show with id "+showId));
     }
 
     @GetMapping(path = "{showId}/inventory")

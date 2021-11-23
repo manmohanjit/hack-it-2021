@@ -5,7 +5,9 @@ import com.cinema.booking.category.CategoryService;
 import com.cinema.booking.show.ShowData;
 import com.cinema.booking.show.ShowService;
 import lombok.AllArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 
@@ -27,7 +29,7 @@ public class MovieController {
     public MovieResponseData findMovie(@PathVariable("movieId") Long movieId) {
         return movieService
                 .findMovie(movieId)
-                .orElseThrow(() -> new IllegalStateException("Unable to find movie by id "+movieId));
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Unable to find movie with id "+movieId));
     }
 
     @GetMapping(path = "{movieId}/shows")
