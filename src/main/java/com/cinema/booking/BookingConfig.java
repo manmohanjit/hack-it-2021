@@ -1,8 +1,8 @@
 package com.cinema.booking;
 
+import com.cinema.booking.category.Category;
 import com.cinema.booking.hall.Hall;
 import com.cinema.booking.hall.HallRepository;
-import com.cinema.booking.category.Category;
 import com.cinema.booking.inventory.Inventory;
 import com.cinema.booking.inventory.InventoryRepository;
 import com.cinema.booking.inventory.InventoryStatus;
@@ -64,7 +64,7 @@ public class BookingConfig {
             inventoryRepository.saveAll(inventoryList);
 
             Optional<Inventory> item = inventoryList.stream().findFirst();
-            if(item.isPresent()) {
+            if (item.isPresent()) {
                 item.get().setStatus(InventoryStatus.RESERVED);
                 inventoryRepository.save(item.get());
 

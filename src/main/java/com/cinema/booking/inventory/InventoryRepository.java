@@ -1,7 +1,5 @@
 package com.cinema.booking.inventory;
 
-import com.cinema.booking.hall.Hall;
-import org.hibernate.annotations.Where;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Lock;
 import org.springframework.stereotype.Repository;

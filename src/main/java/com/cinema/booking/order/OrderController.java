@@ -1,16 +1,13 @@
 package com.cinema.booking.order;
 
-import com.cinema.booking.inventory.Inventory;
 import com.cinema.booking.inventory.InventoryService;
 import com.cinema.booking.inventory.InventoryUnavailableException;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
 import javax.validation.Valid;
-import java.util.UUID;
 
 @RestController
 @RequestMapping(path = "/api/v1/orders")
@@ -34,7 +31,7 @@ public class OrderController {
     public OrderResponseData getOrder(@PathVariable("orderId") String orderId) {
         return orderService
                 .findOrder(orderId)
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Unable to find order with id "+orderId));
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Unable to find order with id " + orderId));
     }
 
     @PatchMapping(path = "{orderId}")
@@ -42,7 +39,7 @@ public class OrderController {
         try {
             return orderService
                     .updateOrderDetails(orderId, updateOrderRequestData)
-                    .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Unable to find order with id "+orderId));
+                    .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Unable to find order with id " + orderId));
         } catch (InvalidOrderStateException e) {
             throw new ResponseStatusException(HttpStatus.UNPROCESSABLE_ENTITY, e.getMessage());
         }
@@ -53,7 +50,7 @@ public class OrderController {
         try {
             return orderService
                     .cancelOrder(orderId)
-                    .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Unable to find order with id "+orderId));
+                    .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Unable to find order with id " + orderId));
         } catch (InvalidOrderStateException e) {
             throw new ResponseStatusException(HttpStatus.UNPROCESSABLE_ENTITY, e.getMessage());
         }
@@ -64,7 +61,7 @@ public class OrderController {
         try {
             OrderResponseData order = orderService
                     .completeOrder(orderId)
-                    .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Unable to find order with id "+orderId));
+                    .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Unable to find order with id " + orderId));
 
             orderService.sendOrderMail(orderId);
 

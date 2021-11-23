@@ -24,7 +24,7 @@ public class ShowController {
     public ShowData getShow(@PathVariable("showId") Long showId) {
         return showService
                 .findShow(showId)
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Unable to find show with id "+showId));
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Unable to find show with id " + showId));
     }
 
     @GetMapping(path = "{showId}/inventory")

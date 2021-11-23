@@ -1,7 +1,7 @@
 package com.cinema.booking.hall;
 
 import com.cinema.booking.seat.SeatResponseData;
-import lombok.*;
+import lombok.Data;
 
 import java.util.HashSet;
 import java.util.Set;

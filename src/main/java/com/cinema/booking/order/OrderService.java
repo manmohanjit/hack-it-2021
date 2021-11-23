@@ -12,12 +12,13 @@ import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
-import org.springframework.validation.BindingResult;
 
 import javax.transaction.Transactional;
-import java.sql.Array;
 import java.time.LocalDateTime;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+import java.util.UUID;
 import java.util.function.Consumer;
 import java.util.stream.Collectors;
 
@@ -42,7 +43,7 @@ public class OrderService {
         List<Inventory> items = inventoryRepository
                 .findAllByIdInAndStatus(createOrderRequestData.getItems(), InventoryStatus.AVAILABLE);
 
-        if(items.size() != createOrderRequestData.getItems().size()) {
+        if (items.size() != createOrderRequestData.getItems().size()) {
             throw new InventoryUnavailableException();
         }
 
@@ -65,7 +66,7 @@ public class OrderService {
     public void sendOrderMail(String id) {
         Optional<Order> orderData = orderRepository.findById(UUID.fromString(id));
 
-        if(orderData.isEmpty() || orderData.get().getStatus() != OrderStatus.COMPLETED) {
+        if (orderData.isEmpty() || orderData.get().getStatus() != OrderStatus.COMPLETED) {
             return;
         }
 
@@ -84,15 +85,15 @@ public class OrderService {
         SimpleMailMessage message = new SimpleMailMessage();
         message.setFrom("no-reply@example.com");
         message.setTo(order.getEmail());
-        message.setSubject("Your order for "+(movieData.isPresent() ? movieData.get().getTitle() : "your show")+" has been processed!");
+        message.setSubject("Your order for " + (movieData.isPresent() ? movieData.get().getTitle() : "your show") + " has been processed!");
 
         List<String> body = new ArrayList<>();
-        body.add("Hello "+order.getName() + ",\n\n");
+        body.add("Hello " + order.getName() + ",\n\n");
         body.add("Your booking details are as below:\n\n");
         movieData.ifPresent(movie -> body.add("Movie: " + movie.getTitle() + "\n"));
         showData.ifPresent(show -> body.add("Date: " + show.getStartsAt() + "\n"));
-        if(!seatsList.isEmpty()) {
-            body.add("Seats: "+seatsList + "\n");
+        if (!seatsList.isEmpty()) {
+            body.add("Seats: " + seatsList + "\n");
         }
 
         body.add("Reference: " + order.getId().toString() + "\n\n");
@@ -104,7 +105,7 @@ public class OrderService {
     }
 
     public OrderResponseData updateOrderDetails(Order order, UpdateOrderRequestData updateOrderRequestData) throws InvalidOrderStateException {
-        if(order.getStatus() != OrderStatus.INITIAL) {
+        if (order.getStatus() != OrderStatus.INITIAL) {
             throw new InvalidOrderStateException(order, "Order is in invalid state");
         }
 
@@ -121,7 +122,7 @@ public class OrderService {
     public Optional<OrderResponseData> updateOrderDetails(String id, UpdateOrderRequestData updateOrderRequestData) throws InvalidOrderStateException {
         Optional<Order> order = orderRepository.findById(UUID.fromString(id));
 
-        if(order.isEmpty()) {
+        if (order.isEmpty()) {
             return Optional.empty();
         }
 
@@ -130,7 +131,7 @@ public class OrderService {
 
     @Transactional
     public OrderResponseData cancelOrder(Order order) throws InvalidOrderStateException {
-        if(order.getStatus() != OrderStatus.INITIAL && order.getStatus() != OrderStatus.PENDING) {
+        if (order.getStatus() != OrderStatus.INITIAL && order.getStatus() != OrderStatus.PENDING) {
             throw new InvalidOrderStateException(order, "Order is in invalid state");
         }
 
@@ -157,7 +158,7 @@ public class OrderService {
     public Optional<OrderResponseData> cancelOrder(String id) throws InvalidOrderStateException {
         Optional<Order> order = orderRepository.findById(UUID.fromString(id));
 
-        if(order.isEmpty()) {
+        if (order.isEmpty()) {
             return Optional.empty();
         }
 
@@ -167,7 +168,7 @@ public class OrderService {
 
     @Transactional
     public OrderResponseData completeOrder(Order order) throws InvalidOrderStateException {
-        if(order.getStatus() != OrderStatus.PENDING) {
+        if (order.getStatus() != OrderStatus.PENDING) {
             throw new InvalidOrderStateException(order, "Order is in invalid state");
         }
 
@@ -194,7 +195,7 @@ public class OrderService {
     public Optional<OrderResponseData> completeOrder(String id) throws InvalidOrderStateException {
         Optional<Order> order = orderRepository.findById(UUID.fromString(id));
 
-        if(order.isEmpty()) {
+        if (order.isEmpty()) {
             return Optional.empty();
         }
 

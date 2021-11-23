@@ -4,7 +4,6 @@ import com.cinema.booking.category.Category;
 import com.cinema.booking.order.Order;
 import com.cinema.booking.seat.Seat;
 import com.cinema.booking.show.Show;
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.*;
 
 import javax.persistence.*;
@@ -12,7 +11,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Entity(name = "inventory")
-@Table(uniqueConstraints={
+@Table(uniqueConstraints = {
         @UniqueConstraint(columnNames = {"show_id", "category_id", "seat_id"})
 })
 @AllArgsConstructor
@@ -42,7 +41,7 @@ public class Inventory {
     @Enumerated(EnumType.STRING)
     private InventoryStatus status = InventoryStatus.AVAILABLE;
 
-    @Column(columnDefinition="tinyint(1) default 1")
+    @Column(columnDefinition = "tinyint(1) default 1")
     private Boolean enabled;
 
     @ManyToMany(mappedBy = "items", fetch = FetchType.LAZY)

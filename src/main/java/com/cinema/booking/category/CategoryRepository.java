@@ -1,7 +1,5 @@
 package com.cinema.booking.category;
 
-import com.cinema.booking.hall.Hall;
-import com.cinema.booking.movie.Movie;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

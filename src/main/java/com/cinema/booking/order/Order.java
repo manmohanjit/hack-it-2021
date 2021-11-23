@@ -1,14 +1,10 @@
 package com.cinema.booking.order;
 
-import com.cinema.booking.hall.Hall;
 import com.cinema.booking.inventory.Inventory;
-import com.cinema.booking.show.Show;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.Type;
 import org.hibernate.annotations.UpdateTimestamp;
-import org.hibernate.type.UUIDCharType;
-import org.springframework.data.annotation.CreatedDate;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -25,7 +21,7 @@ import java.util.UUID;
 public class Order {
 
     @Id
-    @Type(type="uuid-char")
+    @Type(type = "uuid-char")
     @GeneratedValue
     private UUID id;
 
@@ -47,11 +43,11 @@ public class Order {
     @Column
     private String email;
 
-    @ManyToMany(fetch = FetchType.EAGER, cascade = { CascadeType.MERGE })
+    @ManyToMany(fetch = FetchType.EAGER, cascade = {CascadeType.MERGE})
     @JoinTable(
             name = "inventory_order",
-            joinColumns = { @JoinColumn(name = "order_id") },
-            inverseJoinColumns = { @JoinColumn(name = "inventory_id") }
+            joinColumns = {@JoinColumn(name = "order_id")},
+            inverseJoinColumns = {@JoinColumn(name = "inventory_id")}
     )
     Set<Inventory> items = new HashSet<>();
 

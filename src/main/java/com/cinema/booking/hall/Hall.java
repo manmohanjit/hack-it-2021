@@ -2,8 +2,6 @@ package com.cinema.booking.hall;
 
 import com.cinema.booking.seat.Seat;
 import com.cinema.booking.show.Show;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.*;
 
 import javax.persistence.*;

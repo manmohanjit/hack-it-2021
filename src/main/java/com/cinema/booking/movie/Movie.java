@@ -2,8 +2,6 @@ package com.cinema.booking.movie;
 
 import com.cinema.booking.category.Category;
 import com.cinema.booking.show.Show;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.*;
 
 import javax.persistence.*;

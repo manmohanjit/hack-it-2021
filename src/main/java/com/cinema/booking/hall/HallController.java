@@ -29,7 +29,7 @@ public class HallController {
     public HallResponseData show(@PathVariable("hallId") Long hallId) {
         return hallService
                 .findHall(hallId)
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Unable to find hall with id "+hallId));
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Unable to find hall with id " + hallId));
     }
 
     @GetMapping(path = "{hallId}/seats")

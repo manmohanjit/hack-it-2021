@@ -1,10 +1,6 @@
 package com.cinema.booking.seat;
 
-import com.cinema.booking.hall.Hall;
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import lombok.*;
-
-import javax.persistence.*;
+import lombok.Data;
 
 @Data
 public class SeatResponseData {
