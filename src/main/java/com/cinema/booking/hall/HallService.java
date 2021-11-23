@@ -19,12 +19,8 @@ public class HallService {
     }
 
     public Optional<HallResponseData> findHall(Long hallId) {
-        Optional<Hall> hall = hallRepository.findById(hallId);
-
-        if(hall.isEmpty()) {
-            return Optional.empty();
-        }
-
-        return Optional.of(HallMapper.INSTANCE.fromHall(hall.get()));
+        return hallRepository
+                .findById(hallId)
+                .map(HallMapper.INSTANCE::fromHall);
     }
 }

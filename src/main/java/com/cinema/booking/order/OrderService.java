@@ -21,14 +21,11 @@ public class OrderService {
     private final OrderRepository orderRepository;
     private final InventoryRepository inventoryRepository;
 
+
     public Optional<OrderResponseData> findOrder(String id) {
-        Optional<Order> order = orderRepository.findById(UUID.fromString(id));
-
-        if(order.isEmpty()) {
-            return Optional.empty();
-        }
-
-        return Optional.of(OrderMapper.INSTANCE.fromOrder(order.get()));
+        return orderRepository
+                .findById(UUID.fromString(id))
+                .map(OrderMapper.INSTANCE::fromOrder);
     }
 
     @Transactional

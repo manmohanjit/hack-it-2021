@@ -15,10 +15,10 @@ public class ShowService {
 
     private final ShowRepository showRepository;
 
-    public Optional<Show> findShow(Long id) {
-        Optional<Show> show = showRepository.findById(id);
-
-        return show;
+    public Optional<ShowData> findShow(Long id) {
+        return showRepository
+                .findById(id)
+                .map(ShowMapper.INSTANCE::fromShow);
     }
 
     public List<ShowData> getShowsForMovie(Long movieId) {

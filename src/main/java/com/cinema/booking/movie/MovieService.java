@@ -23,14 +23,9 @@ public class MovieService {
     }
 
     public Optional<MovieResponseData> findMovie(Long movieId) {
-        Optional<Movie> movie = movieRepository
-                .findById(movieId);
-
-        if(movie.isEmpty()) {
-            return Optional.empty();
-        }
-
-        return Optional.of(MovieMapper.INSTANCE.fromMovie(movie.get()));
+        return movieRepository
+                .findById(movieId)
+                .map(MovieMapper.INSTANCE::fromMovie);
     }
 
 }
