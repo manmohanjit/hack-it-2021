@@ -9,4 +9,5 @@ public class ShowData {
     private Long id;
     private LocalDateTime startsAt;
     private LocalDateTime endsAt;
+    private Long hallId;
 }
