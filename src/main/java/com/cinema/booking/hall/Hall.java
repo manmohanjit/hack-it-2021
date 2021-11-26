@@ -24,14 +24,19 @@ public class Hall {
     @NonNull
     private String title;
 
+    @Lob
+    @Column(nullable = false)
+    private String seatMap;
+
     @OneToMany(mappedBy = "hall", fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     private Set<Seat> seats = new HashSet<>();
 
     @OneToMany(mappedBy = "hall", fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     private Set<Show> shows = new HashSet<>();
 
-    public Hall(@NonNull String title) {
+    public Hall(@NonNull String title, @NonNull String seatMap) {
         this.title = title;
+        this.seatMap = seatMap;
     }
 
     public void addSeat(Seat seat) {
