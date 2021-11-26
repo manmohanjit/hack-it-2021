@@ -78,30 +78,30 @@
             <g id="ROW-C" class="row">
                 <g id="Frame 2_3">
                     <path d="M72 204H262V224C262 226.761 259.761 229 257 229H77C74.2386 229 72 226.761 72 224V204Z" fill="white"/>
-                    <path id="C-1" d="M73 205H96V224C96 226.209 94.2091 228 92 228H77C74.7909 228 73 226.209 73 224V205Z" fill="white" stroke="black" stroke-width="2"/>
-                    <path id="C-2" d="M128 205H151V224C151 226.209 149.209 228 147 228H132C129.791 228 128 226.209 128 224V205Z" fill="white" stroke="black" stroke-width="2"/>
-                    <path id="C-3" d="M183 205H206V224C206 226.209 204.209 228 202 228H187C184.791 228 183 226.209 183 224V205Z" fill="white" stroke="black" stroke-width="2"/>
-                    <path id="C-4" d="M238 205H261V224C261 226.209 259.209 228 257 228H242C239.791 228 238 226.209 238 224V205Z" fill="white" stroke="black" stroke-width="2"/>
+                    <path class="seat" id="C-1" d="M73 205H96V224C96 226.209 94.2091 228 92 228H77C74.7909 228 73 226.209 73 224V205Z" fill="white" stroke="black" stroke-width="2"/>
+                    <path class="seat" id="C-2" d="M128 205H151V224C151 226.209 149.209 228 147 228H132C129.791 228 128 226.209 128 224V205Z" fill="white" stroke="black" stroke-width="2"/>
+                    <path class="seat" id="C-3" d="M183 205H206V224C206 226.209 204.209 228 202 228H187C184.791 228 183 226.209 183 224V205Z" fill="white" stroke="black" stroke-width="2"/>
+                    <path class="seat" id="C-4" d="M238 205H261V224C261 226.209 259.209 228 257 228H242C239.791 228 238 226.209 238 224V205Z" fill="white" stroke="black" stroke-width="2"/>
                 </g>
                 <g id="Frame 1_2">
                     <path d="M405 204H925V217C925 219.761 922.761 222 920 222H410C407.239 222 405 219.761 405 217V204Z" fill="white"/>
-                    <path id="C-5" d="M406 205H429V224C429 226.209 427.209 228 425 228H410C407.791 228 406 226.209 406 224V205Z" fill="white" stroke="black" stroke-width="2"/>
-                    <path id="C-6" d="M461 205H484V224C484 226.209 482.209 228 480 228H465C462.791 228 461 226.209 461 224V205Z" fill="white" stroke="black" stroke-width="2"/>
-                    <path id="C-7" d="M516 205H539V224C539 226.209 537.209 228 535 228H520C517.791 228 516 226.209 516 224V205Z" fill="white" stroke="black" stroke-width="2"/>
-                    <path id="C-8" d="M571 205H594V224C594 226.209 592.209 228 590 228H575C572.791 228 571 226.209 571 224V205Z" fill="white" stroke="black" stroke-width="2"/>
-                    <path id="C-9" d="M626 205H649V224C649 226.209 647.209 228 645 228H630C627.791 228 626 226.209 626 224V205Z" fill="white" stroke="black" stroke-width="2"/>
-                    <path id="C-10" d="M681 205H704V224C704 226.209 702.209 228 700 228H685C682.791 228 681 226.209 681 224V205Z" fill="white" stroke="black" stroke-width="2"/>
-                    <path id="C-11" d="M736 205H759V224C759 226.209 757.209 228 755 228H740C737.791 228 736 226.209 736 224V205Z" fill="white" stroke="black" stroke-width="2"/>
-                    <path id="C-12" d="M791 205H814V224C814 226.209 812.209 228 810 228H795C792.791 228 791 226.209 791 224V205Z" fill="white" stroke="black" stroke-width="2"/>
-                    <path id="C-13" d="M846 205H869V224C869 226.209 867.209 228 865 228H850C847.791 228 846 226.209 846 224V205Z" fill="white" stroke="black" stroke-width="2"/>
-                    <path id="C-14" d="M901 205H924V224C924 226.209 922.209 228 920 228H905C902.791 228 901 226.209 901 224V205Z" fill="white" stroke="black" stroke-width="2"/>
+                    <path class="seat" id="C-5" d="M406 205H429V224C429 226.209 427.209 228 425 228H410C407.791 228 406 226.209 406 224V205Z" fill="white" stroke="black" stroke-width="2"/>
+                    <path class="seat" id="C-6" d="M461 205H484V224C484 226.209 482.209 228 480 228H465C462.791 228 461 226.209 461 224V205Z" fill="white" stroke="black" stroke-width="2"/>
+                    <path class="seat" id="C-7" d="M516 205H539V224C539 226.209 537.209 228 535 228H520C517.791 228 516 226.209 516 224V205Z" fill="white" stroke="black" stroke-width="2"/>
+                    <path class="seat" id="C-8" d="M571 205H594V224C594 226.209 592.209 228 590 228H575C572.791 228 571 226.209 571 224V205Z" fill="white" stroke="black" stroke-width="2"/>
+                    <path class="seat" id="C-9" d="M626 205H649V224C649 226.209 647.209 228 645 228H630C627.791 228 626 226.209 626 224V205Z" fill="white" stroke="black" stroke-width="2"/>
+                    <path class="seat" id="C-10" d="M681 205H704V224C704 226.209 702.209 228 700 228H685C682.791 228 681 226.209 681 224V205Z" fill="white" stroke="black" stroke-width="2"/>
+                    <path class="seat" id="C-11" d="M736 205H759V224C759 226.209 757.209 228 755 228H740C737.791 228 736 226.209 736 224V205Z" fill="white" stroke="black" stroke-width="2"/>
+                    <path class="seat" id="C-12" d="M791 205H814V224C814 226.209 812.209 228 810 228H795C792.791 228 791 226.209 791 224V205Z" fill="white" stroke="black" stroke-width="2"/>
+                    <path class="seat" id="C-13" d="M846 205H869V224C869 226.209 867.209 228 865 228H850C847.791 228 846 226.209 846 224V205Z" fill="white" stroke="black" stroke-width="2"/>
+                    <path class="seat" id="C-14" d="M901 205H924V224C924 226.209 922.209 228 920 228H905C902.791 228 901 226.209 901 224V205Z" fill="white" stroke="black" stroke-width="2"/>
                 </g>
                 <g id="Frame 3_3">
                     <path d="M1068 204H1258V224C1258 226.761 1255.76 229 1253 229H1073C1070.24 229 1068 226.761 1068 224V204Z" fill="white"/>
-                    <path id="C-15" d="M1069 205H1092V224C1092 226.209 1090.21 228 1088 228H1073C1070.79 228 1069 226.209 1069 224V205Z" fill="white" stroke="black" stroke-width="2"/>
-                    <path id="C-16" d="M1124 205H1147V224C1147 226.209 1145.21 228 1143 228H1128C1125.79 228 1124 226.209 1124 224V205Z" fill="white" stroke="black" stroke-width="2"/>
-                    <path id="C-17" d="M1179 205H1202V224C1202 226.209 1200.21 228 1198 228H1183C1180.79 228 1179 226.209 1179 224V205Z" fill="white" stroke="black" stroke-width="2"/>
-                    <path id="C-18" d="M1234 205H1257V224C1257 226.209 1255.21 228 1253 228H1238C1235.79 228 1234 226.209 1234 224V205Z" fill="white" stroke="black" stroke-width="2"/>
+                    <path class="seat" id="C-15" d="M1069 205H1092V224C1092 226.209 1090.21 228 1088 228H1073C1070.79 228 1069 226.209 1069 224V205Z" fill="white" stroke="black" stroke-width="2"/>
+                    <path class="seat" id="C-16" d="M1124 205H1147V224C1147 226.209 1145.21 228 1143 228H1128C1125.79 228 1124 226.209 1124 224V205Z" fill="white" stroke="black" stroke-width="2"/>
+                    <path class="seat" id="C-17" d="M1179 205H1202V224C1202 226.209 1200.21 228 1198 228H1183C1180.79 228 1179 226.209 1179 224V205Z" fill="white" stroke="black" stroke-width="2"/>
+                    <path class="seat" id="C-18" d="M1234 205H1257V224C1257 226.209 1255.21 228 1253 228H1238C1235.79 228 1234 226.209 1234 224V205Z" fill="white" stroke="black" stroke-width="2"/>
                 </g>
             </g>
             <g id="ROW-D" class="row">

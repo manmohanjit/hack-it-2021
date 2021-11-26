@@ -47,11 +47,27 @@ public class BookingConfig {
 
             Category category = new Category(
                     movie,
-                    "Gold",
-                    5000,
-                    "#000000"
+                    "Standard",
+                    2500,
+                    "red"
             );
             movie.addCategory(category);
+
+            Category vipCategory = new Category(
+                    movie,
+                    "VIP",
+                    5000,
+                    "orange"
+            );
+            movie.addCategory(vipCategory);
+
+            Category wheelchairCategory = new Category(
+                    movie,
+                    "Wheelchair",
+                    1500,
+                    "cyan"
+            );
+            movie.addCategory(wheelchairCategory);
 
             Show show = new Show(
                     movie,
@@ -64,9 +80,24 @@ public class BookingConfig {
 
             List<Inventory> inventoryList = hall.getSeats()
                     .stream()
+                    .filter(seat -> !seat.getLabel().contains("F") && !seat.getLabel().contains("G") && !seat.getLabel().equals("A-6") && !seat.getLabel().equals("A-7"))
                     .map(seat -> new Inventory(show, category, seat, InventoryStatus.AVAILABLE, true))
                     .toList();
             inventoryRepository.saveAll(inventoryList);
+
+            List<Inventory> vipInventoryList = hall.getSeats()
+                    .stream()
+                    .filter(seat -> seat.getLabel().contains("F") || seat.getLabel().contains("G"))
+                    .map(seat -> new Inventory(show, vipCategory, seat, InventoryStatus.AVAILABLE, true))
+                    .toList();
+            inventoryRepository.saveAll(vipInventoryList);
+
+            List<Inventory> wheelchairInventoryList = hall.getSeats()
+                    .stream()
+                    .filter(seat -> seat.getLabel().equals("A-6") || seat.getLabel().equals("A-7"))
+                    .map(seat -> new Inventory(show, wheelchairCategory, seat, InventoryStatus.AVAILABLE, true))
+                    .toList();
+            inventoryRepository.saveAll(wheelchairInventoryList);
         };
     }
 }

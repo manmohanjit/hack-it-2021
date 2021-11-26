@@ -11,6 +11,6 @@ public class HallResponseData {
 
     private Long id;
     private String title;
-    private Set<SeatResponseData> seats = new HashSet<>();
+    private String seatMap;
 
 }
