@@ -11,8 +11,10 @@ public interface ShowMapper {
     ShowMapper INSTANCE = Mappers.getMapper(ShowMapper.class);
 
     @Mapping(source = "hall.id", target = "hallId")
+    @Mapping(source = "movie.id", target = "movieId")
     ShowData fromShow(Show show);
 
     @Mapping(source = "hall.id", target = "hallId")
+    @Mapping(source = "movie.id", target = "movieId")
     List<ShowData> fromShows(List<Show> shows);
 }

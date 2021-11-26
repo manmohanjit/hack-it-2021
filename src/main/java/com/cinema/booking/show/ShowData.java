@@ -10,4 +10,5 @@ public class ShowData {
     private LocalDateTime startsAt;
     private LocalDateTime endsAt;
     private Long hallId;
+    private Long movieId;
 }
