@@ -8,9 +8,7 @@ import com.cinema.booking.inventory.InventoryRepository;
 import com.cinema.booking.inventory.InventoryStatus;
 import com.cinema.booking.movie.Movie;
 import com.cinema.booking.movie.MovieRepository;
-import com.cinema.booking.order.Order;
 import com.cinema.booking.order.OrderRepository;
-import com.cinema.booking.order.OrderStatus;
 import com.cinema.booking.seat.Seat;
 import com.cinema.booking.show.Show;
 import org.springframework.boot.CommandLineRunner;
@@ -23,7 +21,6 @@ import java.nio.file.Files;
 import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Optional;
 
 @Configuration
 public class BookingConfig {
