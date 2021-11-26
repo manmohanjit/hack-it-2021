@@ -9,6 +9,7 @@ import org.springframework.web.server.ResponseStatusException;
 
 import javax.validation.Valid;
 
+@CrossOrigin
 @RestController
 @RequestMapping(path = "/api/v1/orders")
 @AllArgsConstructor
