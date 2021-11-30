@@ -22,7 +22,7 @@ public class OrderController {
     private final InventoryService inventoryService;
 
     @PostMapping
-    public OrderResponseData createOrder(@Valid CreateOrderRequestData createOrderRequestData) {
+    public OrderResponseData createOrder(@Valid @RequestBody CreateOrderRequestData createOrderRequestData) {
         try {
             return orderService
                     .createOrder(createOrderRequestData);
@@ -31,7 +31,6 @@ public class OrderController {
         }
     }
 
-    // TODO: UUID Error handling
     @GetMapping(path = "{orderId}")
     public OrderResponseData getOrder(@PathVariable("orderId") String orderId) {
         return orderService
@@ -40,7 +39,7 @@ public class OrderController {
     }
 
     @PatchMapping(path = "{orderId}")
-    public OrderResponseData updateOrder(@PathVariable("orderId") String orderId, @Valid UpdateOrderRequestData updateOrderRequestData) {
+    public OrderResponseData updateOrder(@PathVariable("orderId") String orderId, @Valid @RequestBody UpdateOrderRequestData updateOrderRequestData) {
         try {
             return orderService
                     .updateOrderDetails(orderId, updateOrderRequestData)
