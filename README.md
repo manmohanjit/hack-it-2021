@@ -8,8 +8,11 @@ Live Demo: https://hackit.manmohanjit.net/
     * [Introduction](#introduction)
         + [Objectives](#objectives)
         + [Takeaways](#takeaways)
+        + [Scope of Assignment](#scope-of-assignment)
+        + [App Functionality](#app-functionality)
+        + [Requirements](#requirements)
 - [Install guide](#install-guide)
-    * [Requirements](#requirements)
+    * [Requirements](#requirements-1)
     * [Java Back-end](#java-back-end)
         + [Long running process (optional)](#long-running-process--optional-)
     * [Create React App Front-end](#create-react-app-front-end)
@@ -64,6 +67,23 @@ I have never touched Java until the project brief was released around mid-Novemb
 - Spring Boot is very powerful however, it has a steep initial learning curve, but after some time it becomes progressively easier to dive into deeper topics
 - Spring Boot requires a lot of boilerplate code...
 - However, luckily there are many libraries that help reduce it (mapstruct, lombok, etc)
+
+### Scope of Assignment
+- ✅ Create a web application that allows users to book a seat in a movie theatre - no authentication required.
+- ✅ This assignment aims to create a fully functional web application with Backend in Java and Front-end in related technologies such as ReactJS.
+- ✅ Alternatively, you could use a Java MVC framework for creating both the Backend and Frontend.
+
+### App Functionality
+- ✅ Display all the seats in a theatre and allow users to book them.
+- ✅ If a user clicks a seat that another user booked, they should get an error. You must handle the concurrency scenarios and avoid data inconsistency.
+- ✅ If a seat is available, the user should be asked for their details like name, email ID, etc. and email them with a confirmation. You do not need to gather the payment details.
+- ✅ The solution should have a single web page with the seats displayed in a grid (you could start by a smaller number of seats, maybe 20-30)
+
+### Requirements
+- ✅ Hosting a live solution is encouraged and will increase the chance of a higher score for this assignment.
+- ℹ️ Test coverage is essential. (**only UAT due to lack of time**)
+- ✅ Complete installation instructions for your application must be available via README.md.
+- ✅ Please create a new Git repo where you will upload the relevant project files. Please properly document your code.
 
 # Install guide
 
