@@ -91,8 +91,8 @@ I have never touched Java until the project brief was released around mid-Novemb
 - Apache Maven 3.8.4+
 - Java Version 17+
 - H2 (built-in) or MySQL (external)
-- SMTP mail credentials
 - Node 16.5.0
+- SMTP mail credentials (optional)
 
 ## Java Back-end
 
@@ -104,6 +104,8 @@ mvn compile
 mvn package
 java -jar target/booking-0.0.1-SNAPSHOT.jar
 ```
+
+**Note:** You might want to adjust `src/main/resources/application.properties` so that local email works, or if you want to use MySQL as the database driver.
 
 ### Long running process (optional)
 
@@ -520,7 +522,7 @@ Completes an order pragmatically via orderId
 ### Important Notes
 - All routes allow CORS
 - Concurrency is handled via database locks
-- Emails are non-blocking, and performed asynchronously
+- Emails are non-blocking, and performed asynchronously via SMTP
 - Lombok and Mapstruct are used to reduce boilerplate code
 - commandLineRunner in `BookingConfig.java` is used to seed data
 - Some exceptions are handled and transformed into standardized responses in the `errors` module
