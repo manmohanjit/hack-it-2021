@@ -1,6 +1,8 @@
 package com.cinema.booking.order;
 
 import com.cinema.booking.inventory.Inventory;
+import com.cinema.booking.movie.Movie;
+import com.cinema.booking.show.Show;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.Type;
@@ -37,6 +39,10 @@ public class Order {
     @Enumerated(EnumType.STRING)
     private OrderStatus status = OrderStatus.INITIAL;
 
+    @ManyToOne(optional = false)
+    @NonNull
+    private Show show;
+
     @Column
     private String name;
 
@@ -50,11 +56,6 @@ public class Order {
             inverseJoinColumns = {@JoinColumn(name = "inventory_id")}
     )
     Set<Inventory> items = new HashSet<>();
-
-    public Order(String name, String email) {
-        this.name = name;
-        this.email = email;
-    }
 
     public void addItem(Inventory item) {
         this.items.add(item);

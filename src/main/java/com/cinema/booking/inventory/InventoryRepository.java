@@ -13,7 +13,7 @@ public interface InventoryRepository extends JpaRepository<Inventory, Long> {
     List<Inventory> findAllByShowId(Long showId);
 
     @Lock(LockModeType.PESSIMISTIC_WRITE)
-    List<Inventory> findAllByIdInAndStatus(List<Long> ids, InventoryStatus status);
+    List<Inventory> findAllByShowIdAndIdInAndStatus(Long showId, List<Long> ids, InventoryStatus status);
 
     @Lock(LockModeType.PESSIMISTIC_WRITE)
     List<Inventory> findAllByIdIn(List<Long> ids);

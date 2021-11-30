@@ -7,6 +7,7 @@ import com.cinema.booking.inventory.InventoryUnavailableException;
 import com.cinema.booking.movie.Movie;
 import com.cinema.booking.seat.Seat;
 import com.cinema.booking.show.Show;
+import com.cinema.booking.show.ShowRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -27,6 +28,7 @@ import java.util.stream.Collectors;
 public class OrderService {
     private final OrderRepository orderRepository;
     private final InventoryRepository inventoryRepository;
+    private final ShowRepository showRepository;
     private JavaMailSender emailSender;
 
 
@@ -40,8 +42,13 @@ public class OrderService {
     public OrderResponseData createOrder(CreateOrderRequestData createOrderRequestData) throws InventoryUnavailableException {
         Order order = new Order();
 
+        Show show = showRepository.findById(createOrderRequestData.getShowId())
+                .orElseThrow(InventoryUnavailableException::new);
+
+        order.setShow(show);
+
         List<Inventory> items = inventoryRepository
-                .findAllByIdInAndStatus(createOrderRequestData.getItems(), InventoryStatus.AVAILABLE);
+                .findAllByShowIdAndIdInAndStatus(show.getId(), createOrderRequestData.getItems(), InventoryStatus.AVAILABLE);
 
         if (items.size() != createOrderRequestData.getItems().size()) {
             throw new InventoryUnavailableException();
