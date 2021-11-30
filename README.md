@@ -5,12 +5,11 @@ This project was undertaken to participate in the HACK-IT! at OCBC challenge.
 Live Demo: https://hackit.manmohanjit.net/
 
 - [Cinema Booking App for HACK-IT! at OCBC](#cinema-booking-app-for-hack-it--at-ocbc)
-    * [Introduction](#introduction)
-        + [Objectives](#objectives)
-        + [Takeaways](#takeaways)
-        + [Scope of Assignment](#scope-of-assignment)
-        + [App Functionality](#app-functionality)
-        + [Requirements](#requirements)
+    * [Objectives](#objectives)
+    * [Takeaways](#takeaways)
+    * [Scope of Assignment](#scope-of-assignment)
+    * [App Functionality](#app-functionality)
+    * [Requirements](#requirements)
 - [Install guide](#install-guide)
     * [Requirements](#requirements-1)
     * [Java Back-end](#java-back-end)
@@ -33,18 +32,6 @@ Live Demo: https://hackit.manmohanjit.net/
     * [Spring Boot Project Structure](#spring-boot-project-structure)
         + [Module Structure](#module-structure)
         + [Routes](#routes-1)
-            - [GET /movies](#get--movies)
-            - [GET /movies/{movieId}](#get--movies--movieid-)
-            - [GET /movies/{movieId}/shows](#get--movies--movieid--shows)
-            - [GET /events/{movieId}/categories](#get--events--movieid--categories)
-            - [GET /shows/{showId}](#get--shows--showid-)
-            - [GET /shows/{showId}/inventory](#get--shows--showid--inventory)
-            - [GET /halls/{hallId}](#get--halls--hallid-)
-            - [GET /halls/{hallId}/seats](#get--halls--hallid--seats)
-            - [POST /orders/](#post--orders-)
-            - [PATCH /orders/{orderId}](#patch--orders--orderid-)
-            - [DELETE /orders/{orderId}](#delete--orders--orderid-)
-            - [POST /orders/{orderId}/complete](#post--orders--orderid--complete)
         + [Important Notes](#important-notes-1)
 - [Possible Enhancements](#possible-enhancements)
   - [Use Redis to handle concurrency and caching](#use-redis-to-handle-concurrency-and-caching)
@@ -52,34 +39,32 @@ Live Demo: https://hackit.manmohanjit.net/
   - [Design for high-availability (load balanced, stateless, etc)](#design-for-high-availability--load-balanced--stateless--etc-)
   - [Use Docker containers to ease deployment to production](#use-docker-containers-to-ease-deployment-to-production)
 
-## Introduction
-
 I have never touched Java until the project brief was released around mid-November. However, I do have many years of experience in PHP (Laravel), Javascript (React/React Native/Node.js), and Cloud Services.
 
-### Objectives
+## Objectives
 - Explore and learn Java
 - Explore and learn Spring Boot and its ecosystem
 - Learn common design patterns in Spring Boot
 
-### Takeaways
+## Takeaways
 - Started very slow learning Java syntax, but after griding for 1-2 days I managed to figure out the syntax
 - I have a newly found love of working with strongly typed languages
 - Spring Boot is very powerful however, it has a steep initial learning curve, but after some time it becomes progressively easier to dive into deeper topics
 - Spring Boot requires a lot of boilerplate code...
 - However, luckily there are many libraries that help reduce it (mapstruct, lombok, etc)
 
-### Scope of Assignment
+## Scope of Assignment
 - ✅ Create a web application that allows users to book a seat in a movie theatre - no authentication required.
 - ✅ This assignment aims to create a fully functional web application with Backend in Java and Front-end in related technologies such as ReactJS.
 - ✅ Alternatively, you could use a Java MVC framework for creating both the Backend and Frontend.
 
-### App Functionality
+## App Functionality
 - ✅ Display all the seats in a theatre and allow users to book them.
 - ✅ If a user clicks a seat that another user booked, they should get an error. You must handle the concurrency scenarios and avoid data inconsistency.
 - ✅ If a seat is available, the user should be asked for their details like name, email ID, etc. and email them with a confirmation. You do not need to gather the payment details.
 - ✅ The solution should have a single web page with the seats displayed in a grid (you could start by a smaller number of seats, maybe 20-30)
 
-### Requirements
+## Requirements
 - ✅ Hosting a live solution is encouraged and will increase the chance of a higher score for this assignment.
 - ✅  Test coverage is essential.
 - ✅ Complete installation instructions for your application must be available via README.md.
