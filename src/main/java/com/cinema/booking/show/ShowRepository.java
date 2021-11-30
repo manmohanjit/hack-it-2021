@@ -11,6 +11,6 @@ public interface ShowRepository extends JpaRepository<Show, Long> {
 
     List<Show> findAllByMovie(Movie movie);
 
-    List<Show> findAllByMovieId(Long movieId);
+    List<Show> findAllByMovieIdOrderByStartsAtAsc(Long movieId);
 
 }

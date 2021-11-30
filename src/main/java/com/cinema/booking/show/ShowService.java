@@ -19,7 +19,7 @@ public class ShowService {
     }
 
     public List<ShowData> getShowsForMovie(Long movieId) {
-        List<Show> shows = showRepository.findAllByMovieId(movieId);
+        List<Show> shows = showRepository.findAllByMovieIdOrderByStartsAtAsc(movieId);
 
         return ShowMapper.INSTANCE.fromShows(shows);
     }
