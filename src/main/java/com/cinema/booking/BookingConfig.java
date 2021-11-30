@@ -14,6 +14,7 @@ import com.cinema.booking.show.Show;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.util.ResourceUtils;
 
 import java.io.File;
@@ -23,6 +24,7 @@ import java.util.Arrays;
 import java.util.List;
 
 @Configuration
+@EnableAsync
 public class BookingConfig {
 
     @Bean
