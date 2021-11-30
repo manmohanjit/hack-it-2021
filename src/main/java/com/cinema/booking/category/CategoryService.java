@@ -11,6 +11,11 @@ public class CategoryService {
 
     private final CategoryRepository categoryRepository;
 
+    /**
+     * Retrieve a list of categories for a movie by movie ID
+     *
+     * @param movieId
+     */
     public List<CategoryResponseData> getCategoriesForMovie(Long movieId) {
         List<Category> categories = categoryRepository.findAllByMovieId(movieId);
 

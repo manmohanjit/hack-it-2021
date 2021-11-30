@@ -32,12 +32,22 @@ public class OrderService {
     private JavaMailSender emailSender;
 
 
-    public Optional<OrderResponseData> findOrder(String id) {
+    /**
+     * Find an order by order ID
+     *
+     * @param orderId
+     */
+    public Optional<OrderResponseData> findOrder(String orderId) {
         return orderRepository
-                .findById(UUID.fromString(id))
+                .findById(UUID.fromString(orderId))
                 .map(OrderMapper.INSTANCE::fromOrder);
     }
 
+    /**
+     * Create an order via request DataTransfer Object
+     *
+     * @param createOrderRequestData
+     */
     @Transactional
     public OrderResponseData createOrder(CreateOrderRequestData createOrderRequestData) throws InventoryUnavailableException {
         Order order = new Order();
@@ -69,9 +79,14 @@ public class OrderService {
         return OrderMapper.INSTANCE.fromOrder(order);
     }
 
+    /**
+     * Send out an non-blocking (async) email for a given order by order ID
+     *
+     * @param orderId
+     */
     @Async
-    public void sendOrderMail(String id) {
-        Optional<Order> orderData = orderRepository.findById(UUID.fromString(id));
+    public void sendOrderMail(String orderId) {
+        Optional<Order> orderData = orderRepository.findById(UUID.fromString(orderId));
 
         if (orderData.isEmpty() || orderData.get().getStatus() != OrderStatus.COMPLETED) {
             return;
@@ -111,6 +126,12 @@ public class OrderService {
         emailSender.send(message);
     }
 
+    /**
+     * Update order details using a DataTransferObject by order entity
+     *
+     * @param order
+     * @param updateOrderRequestData
+     */
     public OrderResponseData updateOrderDetails(Order order, UpdateOrderRequestData updateOrderRequestData) throws InvalidOrderStateException {
         if (order.getStatus() != OrderStatus.INITIAL) {
             throw new InvalidOrderStateException(order, "Order is in invalid state");
@@ -126,8 +147,14 @@ public class OrderService {
         return OrderMapper.INSTANCE.fromOrder(order);
     }
 
-    public Optional<OrderResponseData> updateOrderDetails(String id, UpdateOrderRequestData updateOrderRequestData) throws InvalidOrderStateException {
-        Optional<Order> order = orderRepository.findById(UUID.fromString(id));
+    /**
+     * Update order details using a DataTransferObject by order ID
+     *
+     * @param orderId
+     * @param updateOrderRequestData
+     */
+    public Optional<OrderResponseData> updateOrderDetails(String orderId, UpdateOrderRequestData updateOrderRequestData) throws InvalidOrderStateException {
+        Optional<Order> order = orderRepository.findById(UUID.fromString(orderId));
 
         if (order.isEmpty()) {
             return Optional.empty();
@@ -135,7 +162,11 @@ public class OrderService {
 
         return Optional.of(updateOrderDetails(order.get(), updateOrderRequestData));
     }
-
+    /**
+     * Cancel an order by order entity
+     *
+     * @param order
+     */
     @Transactional
     public OrderResponseData cancelOrder(Order order) throws InvalidOrderStateException {
         if (order.getStatus() != OrderStatus.INITIAL && order.getStatus() != OrderStatus.PENDING) {
@@ -161,9 +192,14 @@ public class OrderService {
         return OrderMapper.INSTANCE.fromOrder(order);
     }
 
+    /**
+     * Cancel an order by order ID
+     *
+     * @param orderId
+     */
     @Transactional
-    public Optional<OrderResponseData> cancelOrder(String id) throws InvalidOrderStateException {
-        Optional<Order> order = orderRepository.findById(UUID.fromString(id));
+    public Optional<OrderResponseData> cancelOrder(String orderId) throws InvalidOrderStateException {
+        Optional<Order> order = orderRepository.findById(UUID.fromString(orderId));
 
         if (order.isEmpty()) {
             return Optional.empty();
@@ -173,6 +209,11 @@ public class OrderService {
     }
 
 
+    /**
+     * Complete an order by order entity
+     *
+     * @param order
+     */
     @Transactional
     public OrderResponseData completeOrder(Order order) throws InvalidOrderStateException {
         if (order.getStatus() != OrderStatus.PENDING) {
@@ -198,9 +239,14 @@ public class OrderService {
         return OrderMapper.INSTANCE.fromOrder(order);
     }
 
+    /**
+     * Complete an order by order ID
+     *
+     * @param orderId
+     */
     @Transactional
-    public Optional<OrderResponseData> completeOrder(String id) throws InvalidOrderStateException {
-        Optional<Order> order = orderRepository.findById(UUID.fromString(id));
+    public Optional<OrderResponseData> completeOrder(String orderId) throws InvalidOrderStateException {
+        Optional<Order> order = orderRepository.findById(UUID.fromString(orderId));
 
         if (order.isEmpty()) {
             return Optional.empty();

@@ -11,6 +11,11 @@ public class InventoryService {
 
     private final InventoryRepository inventoryRepository;
 
+    /**
+     * Retrieve a list of inventory for a show by show ID
+     *
+     * @param showId
+     */
     public List<InventoryResponseData> getInventoryByShow(Long showId) {
         List<Inventory> inventory = inventoryRepository.findAllByShowId(showId);
 

@@ -11,6 +11,11 @@ public class SeatService {
 
     private final SeatRepository seatRepository;
 
+    /**
+     * Get a list of seats by hall ID
+     *
+     * @param hallId
+     */
     public List<SeatResponseData> getSeatsByHall(Long hallId) {
         List<Seat> seats = seatRepository.findAllByHallId(hallId);
 

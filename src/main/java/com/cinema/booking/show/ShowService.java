@@ -12,12 +12,22 @@ public class ShowService {
 
     private final ShowRepository showRepository;
 
-    public Optional<ShowData> findShow(Long id) {
+    /**
+     * Find a show by show id
+     *
+     * @param showId
+     */
+    public Optional<ShowData> findShow(Long showId) {
         return showRepository
-                .findById(id)
+                .findById(showId)
                 .map(ShowMapper.INSTANCE::fromShow);
     }
 
+    /**
+     * Get a list of shows by movie ID
+     *
+     * @param movieId
+     */
     public List<ShowData> getShowsForMovie(Long movieId) {
         List<Show> shows = showRepository.findAllByMovieIdOrderByStartsAtAsc(movieId);
 
