@@ -81,7 +81,7 @@ I have never touched Java until the project brief was released around mid-Novemb
 
 ### Requirements
 - ✅ Hosting a live solution is encouraged and will increase the chance of a higher score for this assignment.
-- ℹ️ Test coverage is essential. (**only UAT due to lack of time**)
+- ✅  Test coverage is essential.
 - ✅ Complete installation instructions for your application must be available via README.md.
 - ✅ Please create a new Git repo where you will upload the relevant project files. Please properly document your code.
 
@@ -520,13 +520,13 @@ Completes an order pragmatically via orderId
 ```
 
 ### Important Notes
+- Tests for all order endpoints
 - All routes allow CORS
 - Concurrency is handled via database locks
 - Emails are non-blocking, and performed asynchronously via SMTP
 - Lombok and Mapstruct are used to reduce boilerplate code
 - commandLineRunner in `BookingConfig.java` is used to seed data
 - Some exceptions are handled and transformed into standardized responses in the `errors` module
-- No Unit/Feature tests due to lack of time, however thorough UAT has been done
 
 
 # Possible Enhancements
