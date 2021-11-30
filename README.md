@@ -96,7 +96,7 @@ I have never touched Java until the project brief was released around mid-Novemb
 Available at http://localhost:8080
 
 ```bash
-cd hack-it-ocbc-2021
+cd hack-it-2021
 mvn compile
 mvn package
 java -jar target/booking-0.0.1-SNAPSHOT.jar
@@ -114,7 +114,7 @@ If you are using Linux, you can use systemctl to create a long-running service.
 Description=hackit webserver Daemon
 
 [Service]
-ExecStart=/usr/bin/java -jar /home/ubuntu/hack-it-ocbc-2021/target/booking-0.0.1-SNAPSHOT.jar
+ExecStart=/usr/bin/java -jar /home/ubuntu/hack-it-2021/target/booking-0.0.1-SNAPSHOT.jar
 User=ubuntu
 
 [Install]
@@ -128,7 +128,7 @@ More info: https://www.digitalocean.com/community/tutorials/how-to-use-systemctl
 Available at http://localhost:3000
 
 ```bash
-cd hack-it-ocbc-2021
+cd hack-it-2021
 cd frontend
 npm install
 npm run start
