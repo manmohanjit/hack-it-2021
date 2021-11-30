@@ -10,6 +10,7 @@ Live Demo: https://hackit.manmohanjit.net/
     * [Scope of Assignment](#scope-of-assignment)
     * [App Functionality](#app-functionality)
     * [Requirements](#requirements)
+    * [Solution](#solution)
 - [Install guide](#install-guide)
     * [Requirements](#requirements-1)
     * [Java Back-end](#java-back-end)
@@ -52,6 +53,17 @@ I have never touched Java until the project brief was released around mid-Novemb
 - Spring Boot is very powerful however, it has a steep initial learning curve, but after some time it becomes progressively easier to dive into deeper topics
 - Spring Boot requires a lot of boilerplate code...
 - However, luckily there are many libraries that help reduce it (mapstruct, lombok, etc)
+
+## Solution
+- Spring Boot MVC as API server
+- Create React App (CRA) as front-end application
+- Support multiple movies, shows, categories, halls
+- Abstraction of data layer provides flexibility to switch data sources
+- Database transactions and locks to handle concurrency and data consistency
+- Third-party SMTP service (SendGrid) to send out emails (non-blocking)
+- Deployed on an NGINX server block to serve as a reverse proxy so everything is hosted on same domain
+- CloudFlare provides HTTPs for the domain
+- CORS is enabled for development and testing purposes
 
 ## Scope of Assignment
 - ✅ Create a web application that allows users to book a seat in a movie theatre - no authentication required.
@@ -161,13 +173,13 @@ server {
 The hall module contains Hall and Seat entities. Each hall has many seats. This application can have multiple halls available so concurrent shows can be sold at the same time in different halls.
 
 ### Showtime Module
-Each movie will have multiple showtime, that have a one-to-one relationship to halls.
+Each movie will have multiple showtime, that can be linked to different halls.
 
 ### Category Module
 Each movie will also have multiple ticket types and prices.
 
 ### Inventory Module
-The inventory module links halls, showtimes and categories to keep track of available tickets.
+The inventory module links hall seats, showtimes and categories to keep track of available tickets.
 
 ### Order Module
 Orders will interact with multiple module repositories to validate, store and list orders.
@@ -513,16 +525,15 @@ Completes an order pragmatically via orderId
 - commandLineRunner in `BookingConfig.java` is used to seed data
 - Some exceptions are handled and transformed into standardized responses in the `errors` module
 
-
 # Possible Enhancements
 #### Use Redis to handle concurrency and caching
-If I had enough time, I would have used Redis to manage inventory checks and also locking instead of the native database. It will speed up requests as well as reduce load to the database servers. Redis can also be used as a powerful in-memory cache which will boost load times of API endpoints.
+Redis being an in-memory store would be suitable to handle inventory management and tracking. It can be used to handle locks as well as a caching solution. With Redis, we can help speed up requests as well as reduce the load on the database servers.
 
 #### Use a queue pattern to level-load
-As the app grows, a queue pattern to handle heavy requests can be implemented to avoid the possibility of server/database being overworked/overloaded.
+As the app grows, a more robust queue pattern to handle heavy requests can be implemented to avoid the possibility of server/database being overworked.
 
 #### Design for high-availability (load balanced, stateless, etc)
-Some unforeseen events can't be stopped, and in the case of outage of data centers or servers; it will be useful to have the application to be stateless and distributed over a wide array of datacenters.
+Being able to design an application for HA will ensure that we can reduce the risk of downtime. The benefits from HA will also allow us to scale better horizontally and handle higher amounts of traffic or traffic surges.
 
 #### Use Docker containers to ease deployment to production
 Using Docker, it will be easier to manage deployment and infrastructure as the team expands.
