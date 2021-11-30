@@ -109,7 +109,7 @@ public class OrderService {
         body.add("Hello " + order.getName() + ",\n\n");
         body.add("Your booking details are as below:\n\n");
         body.add("Movie: " + movie.getTitle() + "\n");
-        body.add("Date: " + show.getStartsAt());
+        body.add("Date: " + show.getStartsAt() + "\n");
         if (!seatsList.isEmpty()) {
             body.add("Seats: " + seatsList + "\n");
         }
