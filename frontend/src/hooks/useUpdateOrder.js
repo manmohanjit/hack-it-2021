@@ -9,7 +9,10 @@ const useUpdateOrder = (orderId, options = {}) => {
     formData.append('name', name);
     formData.append('email', email);
 
-    return api.patch(`v1/orders/${orderId}`, formData);
+    return api.patch(`v1/orders/${orderId}`, {
+      name,
+      email,
+    });
   }, {
     onSuccess: data => {
       queryClient.setQueryData(['orders', data.id], data);

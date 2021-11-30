@@ -5,11 +5,10 @@ import api from "../services/api";
 
 const useCreateOrder = (showId, options = {}) => {
   const mutation = useMutation(({seats}) => {
-    const formData = new FormData();
-    formData.append('showId', showId);
-    seats.forEach(item => formData.append('items[]', item));
-
-    return api.post("/v1/orders", formData);
+    return api.post("/v1/orders", {
+      showId,
+      items: seats,
+    });
   }, {
     onSuccess: data => {
       queryClient.setQueryData(['orders', data.id], data);
