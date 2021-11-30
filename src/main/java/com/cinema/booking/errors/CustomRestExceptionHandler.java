@@ -42,7 +42,7 @@ public class CustomRestExceptionHandler extends ResponseEntityExceptionHandler {
             WebRequest request) {
         List<String> errors = new ArrayList<>();
         for (FieldError error : ex.getBindingResult().getFieldErrors()) {
-            errors.add(error.getField() + ": " + error.getDefaultMessage());
+            errors.add(error.getField() + " " + error.getDefaultMessage());
         }
         for (ObjectError error : ex.getBindingResult().getGlobalErrors()) {
             errors.add(error.getObjectName() + " " + error.getDefaultMessage());
@@ -62,7 +62,7 @@ public class CustomRestExceptionHandler extends ResponseEntityExceptionHandler {
             WebRequest request) {
         List<String> errors = new ArrayList<>();
         for (FieldError error : ex.getBindingResult().getFieldErrors()) {
-            errors.add(error.getField() + ": " + error.getDefaultMessage());
+            errors.add(error.getField() + " " + error.getDefaultMessage());
         }
         for (ObjectError error : ex.getBindingResult().getGlobalErrors()) {
             errors.add(error.getObjectName() + " " + error.getDefaultMessage());
