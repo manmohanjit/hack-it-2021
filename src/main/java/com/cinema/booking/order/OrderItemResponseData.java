@@ -6,6 +6,7 @@ import lombok.Data;
 
 @Data
 public class OrderItemResponseData {
+    private Long id;
     private CategoryResponseData category;
     private SeatResponseData seat;
 }
