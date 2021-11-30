@@ -9,6 +9,7 @@ import com.cinema.booking.seat.Seat;
 import com.cinema.booking.show.Show;
 import com.cinema.booking.show.ShowRepository;
 import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.scheduling.annotation.Async;
@@ -29,8 +30,8 @@ public class OrderService {
     private final OrderRepository orderRepository;
     private final InventoryRepository inventoryRepository;
     private final ShowRepository showRepository;
+    private final MailProperties mailProperties;
     private JavaMailSender emailSender;
-
 
     /**
      * Find an order by order ID
@@ -96,24 +97,19 @@ public class OrderService {
 
         String seatsList = order.getItems().stream().map(Inventory::getSeat).map(Seat::getLabel).collect(Collectors.joining(", "));
 
-        Optional<Show> showData = order.getItems()
-                .stream()
-                .findFirst()
-                .map(Inventory::getShow);
-
-        Optional<Movie> movieData = showData.map(Show::getMovie);
-
+        Show show = order.getShow();
+        Movie movie = show.getMovie();
 
         SimpleMailMessage message = new SimpleMailMessage();
-        message.setFrom("no-reply@example.com");
+        message.setFrom(mailProperties.getFrom());
         message.setTo(order.getEmail());
-        message.setSubject("Your order for " + (movieData.isPresent() ? movieData.get().getTitle() : "your show") + " has been processed!");
+        message.setSubject("Your order for " + (movie.getTitle()) + " has been processed!");
 
         List<String> body = new ArrayList<>();
         body.add("Hello " + order.getName() + ",\n\n");
         body.add("Your booking details are as below:\n\n");
-        movieData.ifPresent(movie -> body.add("Movie: " + movie.getTitle() + "\n"));
-        showData.ifPresent(show -> body.add("Date: " + show.getStartsAt() + "\n"));
+        body.add("Movie: " + movie.getTitle() + "\n");
+        body.add("Date: " + show.getStartsAt());
         if (!seatsList.isEmpty()) {
             body.add("Seats: " + seatsList + "\n");
         }
